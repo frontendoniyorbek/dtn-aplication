@@ -28,11 +28,11 @@ const Login = () => {
           />
           <h1 className="h3 mb-2 fw-normal">Please login</h1>
 
-          <Input label={'Email address'} state={email} setState={setEmail}/>
+          <Input type={'email'} label={'Email address'} state={email} setState={setEmail}/>
           <Input type={'password'} label={'Password'} state={password} setState={setPassword}/>
 
           <button className="w-100 btn btn-lg btn-primary mt-2" disabled={isLoading} type="submit" onClick={loginHandler}>
-            {isLoading ? 'loading...' : 'login'}
+            {isLoading ? 'loading...' : 'Login'}
           </button>
         </form>
       </main>
