@@ -2,7 +2,8 @@ import { useState } from 'react';
 import logo from '../constants/donyorbek.png'
 import {Input} from '../ui'
 import { useSelector, useDispatch } from 'react-redux';
-import { registerUserStart } from '../slice/auth';
+import AuthService from '../service/auth';
+import { registerUserStart, registerUserFailure, registerUserSuccess } from '../slice/auth';
 
 const Register = () => {
 
@@ -12,10 +13,22 @@ const Register = () => {
   const dispatch = useDispatch()
   const {isLoading} = useSelector(state => state.auth)
 
-  const loginHandler = (e) => {
+  const loginHandler = async (e) => {
     e.preventDefault()
     dispatch(registerUserStart())
+    const user = {username: name, password, email}
+
+    try {
+      const response = await AuthService.userRegister(user)
+      dispatch(registerUserSuccess())
+    }
+
+    catch{
+      dispatch(registerUserFailure())
+    }
+
   }
+
   return (
     <div className="text-center mt-5">
       <main className="form-signin w-25 m-auto">
